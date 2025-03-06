@@ -1,0 +1,26 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      - SA_PASSWORD=Your_password123
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    networks:
+      - backend
+
+  graphqlbooksapi:
+    build: .
+    depends_on:
+      - sqlserver
+    ports:
+      - "5000:80"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+networks:
+  backend:
+    driver: bridge
