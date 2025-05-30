@@ -7,13 +7,13 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy your corporate certificates into the image
-COPY corp-root-ca.crt /usr/local/share/ca-certificates/corp-root-ca.crt
+# # Copy your corporate certificates into the image
+# COPY corp-root-ca.crt /usr/local/share/ca-certificates/corp-root-ca.crt
 
-# Install the certificates inside the image
-RUN apt-get update \
-    && apt-get install -y ca-certificates \
-    && update-ca-certificates
+# # Install the certificates inside the image
+# RUN apt-get update \
+#     && apt-get install -y ca-certificates \
+#     && update-ca-certificates
 
 # Copy and restore
 COPY ["GraphQLBooksApi.csproj", "./"]
